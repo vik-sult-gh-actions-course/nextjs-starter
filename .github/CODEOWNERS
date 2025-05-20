@@ -1,0 +1,5 @@
+* @viktoriiasultanovska
+*.js @viktoriiasultanovska
+*.ts @viktoriiasultanovska
+*.tsx @viktoriiasultanovska
+/e2e/ @viktoriiasultanovska
