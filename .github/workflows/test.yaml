@@ -23,27 +23,28 @@ jobs:
         run: npm run typecheck
       - name: Build Project
         run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: build
           path: .next/
       - name: Run Unit Tests
         run: npm run test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: coverage
           path: coverage/
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: vik-sult-gh-actions-course/nextjs-starter
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run E2E Tests
         run: npm run test:e2e
-      - uses: actions/upload-artifact@v4
+        env:
+          FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
@@ -52,6 +53,18 @@ jobs:
         uses: slackapi/slack-github-action@v1.24.0
         if: failure()
         with:
-          payload-file-path: "./.github/slack/test-failure-slack-payload.json"
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🛑 *<https://github.com/${{github.repository}}/actions/runs/${{ github.run_id }}|${{ github.workflow }} workflow run>* failed."
+                  }
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
