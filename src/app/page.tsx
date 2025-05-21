@@ -10,7 +10,7 @@ export default async function Home() {
       <div>
         <h2>Hello World</h2>
       </div>
-      <Link href="/about">About</Link>
+       <Link href="/about">About</Link>
       <br />
       {flags.isFeatureEnabled("search") && <input placeholder="Search" />}
     </main>
