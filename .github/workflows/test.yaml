@@ -23,12 +23,12 @@ jobs:
         run: npm run typecheck
       - name: Build Project
         run: npm run build
-      - name: Run ls -la
-        run: ls -la .next/
       - uses: actions/upload-artifact@v4
         with:
           name: build
           path: .next/
+      - name: Run ls -la
+        run: ls -la .next/
       - name: Run Unit Tests
         run: npm run test
       - uses: actions/upload-artifact@v4
