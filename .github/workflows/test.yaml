@@ -27,8 +27,10 @@ jobs:
         with:
           name: build
           path: .next/
-      - name: Run ls -la
+      - name: Run ls -la [next]
         run: ls -la .next/
+      - name: Run ls -la [src]
+        run: ls -la src/
       - name: Run Unit Tests
         run: npm run test
       - uses: actions/upload-artifact@v4.6.2
