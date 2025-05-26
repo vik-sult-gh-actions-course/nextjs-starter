@@ -23,7 +23,7 @@ jobs:
         run: npm run typecheck
       - name: Build Project
         run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.6.2
         with:
           name: build
           path: .next/
@@ -31,7 +31,7 @@ jobs:
         run: ls -la .next/
       - name: Run Unit Tests
         run: npm run test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.6.2
         if: always()
         with:
           name: coverage
@@ -46,7 +46,7 @@ jobs:
         run: npm run test:e2e
         env:
           FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4.6.2
         if: always()
         with:
           name: playwright-report
