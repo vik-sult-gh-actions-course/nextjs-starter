@@ -41,7 +41,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Install Playwright Browsers
-        run: npx playwright@1.52 install --with-deps
+        run: npx playwright@1.52 install --with-deps chromium
       - name: Run E2E Tests
         run: npm run test:e2e
         env:
